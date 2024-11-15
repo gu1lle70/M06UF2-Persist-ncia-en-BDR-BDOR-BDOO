@@ -2,6 +2,7 @@
 
 if (!isset($_POST["register_name"]) ||
     !isset($_POST["register_username"]) ||
+    !isset($_POST["register_email"]) ||
     !isset($_POST["register_password"]) ||
     !isset($_POST["register_repassword"])) {
     die("ERROR 1: Formulario no enviado");

@@ -44,7 +44,7 @@ $creator = mysqli_fetch_array($result);
 
 session_start();
 
-$_SESSION["id_creator"] - $creator["id_creator"];
+$_SESSION["id_creator"] = $creator["id_creator"];
 
 header("Location: dashboard.php");
 
