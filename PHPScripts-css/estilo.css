@@ -1,0 +1,39 @@
+body{
+margin:0;
+padding:0;
+}
+header{
+background-color:#000;
+color:#fff
+}
+header h1{
+margin:0;
+padding:0;
+}
+header nav ul{
+display:flex;
+list-style:none;
+padding:0;
+margin:0;
+justify-content:space-evenly;
+}
+header nav li a{
+display:flex;
+padding: 8px;
+margin: 8px;
+color: #ff0;
+text-decoration:none;
+}
+header nav li a:hover{
+background-color:#333;
+}
+main{
+ display: flex;
+ flex-direction: column;
+ padding: 20px;
+ margin: 20px;	
+}
+main form{
+padding: 10px;
+}
+
