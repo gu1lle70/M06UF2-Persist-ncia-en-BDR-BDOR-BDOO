@@ -81,6 +81,14 @@ if(!$result){
 }
 $id_game = mysqli_insert_id($conn);
 
+$creator_id = $_SESSION["id_creator"];
+$relation_query = "INSERT INTO creators_games (id_creator, id_game) VALUES ('{$creator_id}', '{$id_game}')";
+$relation_result = mysqli_query($conn, $relation_query);
+
+if(!$relation_result){
+    die("ERROR 14: No se pudo relacionar el juego con el creador");
+}
+
 header("Location: dashboard_games.php?id_game=".$id_game);
 
 exit();

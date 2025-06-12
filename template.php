@@ -6,6 +6,7 @@ function printHead($title)
 <!doctype html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>{$title}</title>
     <link rel="stylesheet" href="estilo.css" />
 </head>
@@ -37,9 +38,9 @@ function openBody($title = "ENTIch")
 <nav>
     <ul>
         <li><a href="index.php">Home</a></li>
-        <li>Juegos</li>
-        <li>Creadores</li>
-        <li>Tags</li>
+        <li><a href="#">Juegos</a></li>
+        <li><a href="#">Creadores</a></li>
+        <li><a href="#">Tags</a></li>
 {$login_opt}
     </ul>
 </nav>

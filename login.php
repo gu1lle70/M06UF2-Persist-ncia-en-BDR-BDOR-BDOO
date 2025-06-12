@@ -39,6 +39,4 @@ EOD;
 
 closeBody();
 
-echo "<p>Esto es el main</p>";
-
 ?>

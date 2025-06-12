@@ -84,10 +84,56 @@ EOD;
 EOD;
 
 } else {
+    // Mostrar lista de juegos del creador
     echo <<<EOD
-<p><a href="dashboard_games.php?add_game=true">Add Game</a></p>
-//Listado de juegos con el enlace en el título tipo dashboard_game.php?id_game="ID_JUEGO"
+    <h2>Tus Juegos</h2>
+    <p><a href="dashboard_games.php?add_game=true">Nuevo Juego</a></p>
 EOD;
+
+    $query = "SELECT g.* FROM games g 
+              JOIN creators_games cg ON g.id_game = cg.id_game 
+              WHERE cg.id_creator = ".$_SESSION["id_creator"];
+    
+    $result = mysqli_query($conn, $query);
+    
+    if(mysqli_num_rows($result)) {
+        echo '<ul>';
+        while($game = mysqli_fetch_array($result)) {
+            echo '<li><a href="dashboard_games.php?id_game='.$game['id_game'].'">'.htmlspecialchars($game['title']).'</a></li>';
+        }
+        echo '</ul>';
+    } else {
+        echo '<p>No hay juegos.</p>';
+    }
+
+    // --- NUEVA SECCIÓN DE COMENTARIOS ---
+    echo '<h2>Comentarios en tus juegos</h2>';
+    
+    $comments_query = "SELECT c.*, g.title AS game_title, cr.name AS commenter_name
+                      FROM comments c
+                      JOIN games g ON c.id_game = g.id_game
+                      JOIN creators cr ON c.id_creator = cr.id_creator
+                      JOIN creators_games cg ON g.id_game = cg.id_game
+                      WHERE cg.id_creator = ".$_SESSION["id_creator"]."
+                      ORDER BY c.id_comment DESC";
+    
+    $comments_result = mysqli_query($conn, $comments_query);
+    
+    if(mysqli_num_rows($comments_result) > 0) {
+        echo '<div class="comments-container">';
+        while($comment = mysqli_fetch_array($comments_result)) {
+            echo '<div class="comment">';
+            echo '<h3>'.htmlspecialchars($comment['game_title']).'</h3>';
+            echo '<p><strong>De:</strong> '.htmlspecialchars($comment['commenter_name']).'</p>';
+            echo '<p>'.htmlspecialchars($comment['comment']).'</p>';
+            echo '</div>';
+            echo '<hr>';
+        }
+        echo '</div>';
+    } else {
+        echo '<p>No hay comentarios en tus juegos.</p>';
+    }
+    // --- FIN SECCIÓN COMENTARIOS ---
 }
 
 closeDashboard();
